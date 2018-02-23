@@ -16,30 +16,30 @@ public class PageController<Public>
 		return "hello";
 	}
 	
-	@RequestMapping("/hello/greeting")
-	public String greeting (@RequestParam(value = "name") String name, Model model)
+	@RequestMapping("/greeting")
+	public String greeting (@RequestParam(value = "name",required=false,defaultValue="dunia") String name, Model model)
 	{
 		model.addAttribute ("name", name);
 		return "greeting";
 	}
 	
-//	@RequestMapping("/greeting/{name}")
-//	public String greetingPath (@PathVariable String name, Model model)
-//	{
-//		model.addAttribute("name", name);
-//		return "greeting";
-//	}
-	
-	@RequestMapping(value = {"/greeting","greeting/{name}"})
-	public String greetingPath(@PathVariable Optional<String> name, Model model)
+	@RequestMapping("/greeting/{name}")
+	public String greetingPath (@PathVariable String name, Model model)
 	{
-		if (name.isPresent()) {
-			model.addAttribute("name", name.get());
-		}else {
-			model.addAttribute("name", "apap");
-		}
+		model.addAttribute("name", name);
 		return "greeting";
 	}
+	
+//	@RequestMapping(value = {"/greeting","greeting/{name}"})
+//	public String greetingPath(@PathVariable Optional<String> name, Model model)
+//	{
+//		if (name.isPresent()) {
+//			model.addAttribute("name", name.get());
+//		}else {
+//			model.addAttribute("name", "apap");
+//		}
+//		return "greeting";
+//	}
 	
 	@RequestMapping("/perkalian")
 	public String doPerkalian 
